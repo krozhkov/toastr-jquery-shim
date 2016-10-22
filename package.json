@@ -1,0 +1,23 @@
+{
+  "name": "toastr-jquery-shim",
+  "version": "0.0.1",
+  "description": "Simple jQuery replacement for toastr library.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/krozhkov/toastr-jquery-shim.git"
+  },
+  "keywords": [
+    "toastr",
+    "jquery"
+  ],
+  "author": "k.rozhkov",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/krozhkov/toastr-jquery-shim/issues"
+  },
+  "homepage": "https://github.com/krozhkov/toastr-jquery-shim#readme"
+}
