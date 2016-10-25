@@ -20,12 +20,12 @@
             return type;
         }
 
-        function jQuery(selector) {
+        function jQuery(selector, host) {
             if (selector instanceof jQuery) {
                 return selector;
             }
             if (!(this instanceof jQuery)) {
-                return new jQuery(selector);
+                return new jQuery(selector, host);
             }
 
             if (typeof selector === 'string') {
@@ -34,7 +34,15 @@
                     div.innerHTML = selector;
                     this.nodes = Array.prototype.slice.call(div.childNodes);
                 } else {
-                    this.nodes = Array.prototype.slice.call(document.querySelectorAll(selector));
+                    if (!!host) {
+                        this.nodes = host.nodes.map(function (node) {
+                            return Array.prototype.slice.call(node.querySelectorAll(selector));
+                        }).reduce(function (a, b) {
+                            return a.concat(b);
+                        });
+                    } else {
+                        this.nodes = Array.prototype.slice.call(document.querySelectorAll(selector));
+                    }
                 }
             } else if (selector instanceof HTMLElement) {
                 this.nodes = [selector];
