@@ -1,6 +1,6 @@
 {
   "name": "toastr-jquery-shim",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Simple jQuery replacement for toastr library.",
   "main": "index.js",
   "scripts": {

@@ -172,14 +172,18 @@
 
         jQuery.prototype.unbind = function (event) {
             var fn = this.eventHandlers[event];
-            delete this.eventHandlers[event];
-            return this.each(function (el) {
-                if (typeof el.removeEventListener === "function") {
-                    el.removeEventListener(event, fn, false);
-                } else if (el.detachEvent) {
-                    el.detachEvent("on" + event, fn);
-                }
-            });
+            if (!!fn) {
+                delete this.eventHandlers[event];
+                return this.each(function (el) {
+                    if (typeof el.removeEventListener === "function") {
+                        el.removeEventListener(event, fn, false);
+                    } else if (el.detachEvent) {
+                        el.detachEvent("on" + event, fn);
+                    }
+                });
+            } else {
+                return this;
+            }
         };
 
         jQuery.prototype.unbindAll = function () {
@@ -216,6 +220,7 @@
             this.addClass('alertify-log');
             setTimeout((function () {
                 if (jQuery.transition !== null) {
+                    this.unbind(jQuery.transition);
                     this.bind(jQuery.transition, (function () {
                         this.unbind(jQuery.transition);
                         if (options.complete) {
@@ -235,6 +240,7 @@
         jQuery.prototype.fadeOut = function (options) {
             setTimeout((function () {
                 if (jQuery.transition !== null) {
+                    this.unbind(jQuery.transition);
                     this.bind(jQuery.transition, (function () {
                         this.unbind(jQuery.transition);
                         this.hide();
